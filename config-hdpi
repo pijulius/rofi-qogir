@@ -1,0 +1,183 @@
+configuration {
+    modi: "run,Server :server,drun,window";
+    display-run: "# ";
+    display-ssh: "SSH ";
+    display-drun: "App ";
+    display-window: "Window ";
+    font: "Terminus 15";
+    auto-select: false;
+    terminal: "terminator";
+    run-shell-command: "{terminal} -e \"bash -c '{cmd};bash'\"";
+    separator-style: "solid";
+    show-icons: true;
+    kb-row-last: "";
+    kb-row-first: "";
+    kb-move-front: "Home";
+    kb-move-end: "End";
+    kb-element-next: "Alt+Tab";
+    kb-element-prev: "Alt+Shift+Tab";
+    kb-row-select: "Tab";
+    kb-primary-paste: "Control+V,Shift+Insert,Control+Shift+Insert";
+    kb-clear-line: "Control+a";
+    click-to-exit: false;
+    disable-history: false;
+    run,drun {
+        fallback-icon: "exec";
+    }
+}
+
+window {
+    width: 550px;
+    background-color: #fafbfc;
+    border: 0;
+    padding: 0;
+    children: [ vertbox ];
+    orientation: vertical;
+    children: [ inputbar, listview, toolbar ];
+    spacing: 0;
+}
+
+mode-switcher {
+    margin: 0;
+    expand: true;
+}
+
+button {
+    font: "Sans 11";
+    expand: false;
+    padding: 3px 15px 7px 20px;
+    text-color: rgba(0, 0, 0, 0.4);
+    border: 2px 0 0 0;
+    border-color: transparent;
+}
+
+button selected.normal {
+    text-color: rgba(0, 0, 0, 1);
+    border-color: #5294e2;
+    border: 2px 0 0 0;
+    background-color: transparent;
+}
+
+error-message {
+    border: 0;
+    background-color: #fafbfc;
+    padding: 10px 25px;
+}
+
+inputbar {
+    font: "Terminus 15";
+    background-color: #ffffff;
+    border-color: #dde3e9;
+    border: 0 0 1px dash 0;
+    padding: 10px 15px;
+    children: [ prompt, entry, num-filtered-rows, textbox-slash, num-rows, icon-clear ];
+}
+
+textbox-slash {
+    padding: 0 5px;
+    content: "/";
+    expand: false;
+}
+
+entry {
+    placeholder: "";
+}
+
+icon-switch,
+icon-clear {
+    expand: false;
+    size: 22;
+    vertical-align: 0.5;
+    padding: 0 10px;
+}
+
+icon-clear {
+    filename: "gtk-clear";
+    action: "kb-clear-line";
+    padding: 0 0 0 10px;
+}
+
+listview {
+    scrollbar: false;
+    expand: true;
+    border: 0 0 1px 0;
+    border-color: #dde3e9;
+    padding: 0;
+    background-color: #ffffff;
+    children: [element-icon, element-text];
+}
+
+scrollbar {
+    handle-color: #b8babf;
+    border-radius: 5px;
+}
+
+toolbar {
+    orientation: horizontal;
+    children: [ mode-switcher, icon-delete, icon-paste, icon-terminal ];
+    expand: false;
+    padding: 0 5px 3px 0;
+}
+
+icon-switch,
+icon-delete,
+icon-paste,
+icon-terminal,
+icon-close {
+    expand: false;
+    size: 24;
+    vertical-align: 0.5;
+    padding: 9px 9px;
+}
+
+icon-switch {
+    filename: "arrow-right-double";
+    action: "kb-mode-next";
+    horizontal-align: 0;
+    expand: true;
+}
+
+icon-delete {
+    filename: "gtk-remove";
+    action: "kb-delete-entry";
+}
+
+icon-paste {
+    filename: "gtk-paste";
+    action: "kb-primary-paste";
+}
+
+icon-terminal {
+    filename: "dialog-scripts";
+    action: "kb-accept-alt";
+}
+
+icon-close {
+    filename: "file-operation-cancelled-symbolic";
+    action: "kb-cancel";
+}
+
+element {
+    padding: 9px 10px;
+    cursor: default;
+}
+
+element.normal.normal,
+element.normal.urgent,
+element.normal.active,
+element.alternate.normal,
+element.alternate.urgent,
+element.alternate.active {
+    background-color: #ffffff;
+}
+
+element.selected.normal,
+element.selected.urgent,
+element.selected.active {
+    background-color: #5294e2;
+    text-color: #ffffff;
+}
+
+element-icon {
+    padding: 0 7px 0 0;
+}
